@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SampleMosbyMVP</string>
+    <string name="error_loading_countries">Error while loading countries</string>
+    <string name="error_loading_countries_retry">Error while loading countries. Click here to retry</string>
+    <string name="error_occurred">An error has occurred! click here to retry</string>
+    <string name="title_activity_lce">Lce activity</string>
+    <string name="title_activity_viewpager">View Pager</string>
+</resources>
