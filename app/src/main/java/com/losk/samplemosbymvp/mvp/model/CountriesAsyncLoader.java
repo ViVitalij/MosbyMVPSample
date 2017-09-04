@@ -13,17 +13,16 @@ public class CountriesAsyncLoader extends AsyncTask<Void, Void, List<Country>> {
         void onError(Exception e);
     }
 
-
     private CountriesLoaderListener listener;
-    private boolean shouldFail;
 
-    public CountriesAsyncLoader(boolean shouldFail, CountriesLoaderListener listener) {
-        this.shouldFail = shouldFail;
+    public CountriesAsyncLoader(CountriesLoaderListener listener) {
         this.listener = listener;
     }
 
     @Override
     protected List<Country> doInBackground(Void... voids) {
+
+        //simulation of downloading data
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -38,11 +37,8 @@ public class CountriesAsyncLoader extends AsyncTask<Void, Void, List<Country>> {
     @Override
     protected void onPostExecute(List<Country> countries) {
         if (isCancelled() || countries == null) {
-            return;
-        }
-
-        if (shouldFail) {
             listener.onError(new Exception("Oops, something went wrong!"));
+        } else {
             listener.onSuccess(countries);
         }
     }
