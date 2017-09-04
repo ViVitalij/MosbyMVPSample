@@ -16,7 +16,6 @@ public class SimpleCountriesPresenter extends MvpBasePresenter<CountriesView>
 
     private static final String TAG = "CountriesPresenter";
 
-    private int failingCounter = 0;
     private CountriesAsyncLoader countriesLoader;
 
     public SimpleCountriesPresenter() {
@@ -36,8 +35,7 @@ public class SimpleCountriesPresenter extends MvpBasePresenter<CountriesView>
             countriesLoader.cancel(true);
         }
 
-        countriesLoader = new CountriesAsyncLoader(++failingCounter % 2 != 0,
-                new CountriesAsyncLoader.CountriesLoaderListener() {
+        countriesLoader = new CountriesAsyncLoader(new CountriesAsyncLoader.CountriesLoaderListener() {
 
                     @Override
                     public void onSuccess(List<Country> countries) {
@@ -56,7 +54,8 @@ public class SimpleCountriesPresenter extends MvpBasePresenter<CountriesView>
 
                         if (isViewAttached()) {
 
-                            Log.d(TAG, "showError(" + e.getClass().getSimpleName() + " , " + pullToRefresh + ")");
+                            Log.d(TAG, "showError(" + e.getClass().getSimpleName() + " , "
+                                    + pullToRefresh + ")");
                             getView().showError(e, pullToRefresh);
                         }
                     }
